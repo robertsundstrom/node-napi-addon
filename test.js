@@ -1,2 +1,2 @@
 const myaddon = require('./build/Release/addon');
-console.log(myaddon.sayHello());
+console.log(myaddon.Foo.sayHello());

@@ -4,6 +4,8 @@
 
 using namespace std;
 
+#define NULL nullptr
+
 napi_value SayHello(napi_env env, napi_callback_info info)
 {
     napi_status status;
@@ -33,6 +35,17 @@ void Init(napi_env env, napi_value exports, napi_value module, void *priv)
         return;
 
     status = napi_set_named_property(env, exports, "sayHello", fn);
+    if (status != napi_ok)
+        return;
+
+    napi_value obj;
+    status = napi_create_object(env, &obj);
+
+    status = napi_set_named_property(env, obj, "sayHello", fn);
+    if (status != napi_ok)
+        return;
+
+    status = napi_set_named_property(env, exports, "Foo", obj);
     if (status != napi_ok)
         return;
 }
